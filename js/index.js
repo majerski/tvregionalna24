@@ -6,10 +6,7 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady:function(){
-        app.receivedEvent('deviceready');
-    },
-    receivedEvent:function(id){
-        
+        FastClick.attach(document.body);
     }
 };
 $(document).ready(function(){
