@@ -16,7 +16,7 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	//if(state == 'fail'){return false;}
+	if(state == 'fail'){return false;}
 	return true;
 };
 function refreshHTML(){
@@ -26,7 +26,9 @@ function refreshHTML(){
 	});
 };
 function loadingHTML(){
-	$('.content').html('<div class="loading"></div>');
+	$('.content > div').fadeOut("fast",function(){
+		$('.content').html('<div class="loading"></div>');
+	});
 };
 function refresh(){
 	$(".refresh .btn").button('loading');
@@ -40,18 +42,20 @@ function refresh(){
 };
 function loadContent(){
 	loadingHTML();
-	if(gotConnection()){
-		var	c	= $('.content').attr('data-controller'),
-			cc	= $('.content').attr('data-category'),
-			s	= 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
-		$.ajax({
-			url: 'http://www.tvregionalna24.pl/app/app.php',
-			type: 'GET',
-			async: false,
-			cache: false,
-			data: {controller:c, category:cc, secret:s},
-			dataType: 'json',
-			success: function(response){
+	
+	setTimeout(function(){
+		if(gotConnection()){
+			var	c	= $('.content').attr('data-controller'),
+				cc	= $('.content').attr('data-category'),
+				s	= 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
+			$.ajax({
+				url: 'http://www.tvregionalna24.pl/app/app.php',
+				type: 'GET',
+				async: false,
+				cache: false,
+				data: {controller:c, category:cc, secret:s},
+				dataType: 'json'
+			}).done(function(response){
 				console.log(response);
 				switch(response.type){
 					case 'success':
@@ -61,27 +65,19 @@ function loadContent(){
 						$('.content').html('<div class="response">' + response.message + '</div>');
 						break;
 					case 'error':
-						$('.content').html(response.message);
+						$('.content').html('<div class="response">' + response.message + '</div>');
 						$('.refresh').css({
 							"margin-top": 20-($('.refresh').height() / 2)
 						});
 						break;
 				}
-				/*
-				$(".loading").fadeOut("fast",function(){
-					$.each(response.items,function(i,item){
-						
-					});
-				});
-				*/
-			},
-			error: function(){
+			}).fail(function(){
 				refreshHTML();
-			}
-		});
-	} else {
-		refreshHTML();
-	}
+			});
+		} else {
+			refreshHTML();
+		}
+	}, 1000);
 };
 var app = {
     initialize:function(){
