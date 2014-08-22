@@ -16,11 +16,14 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	if(state == 'fail'){return false;}
+	//if(state == 'fail'){return false;}
 	return true;
 };
 function refreshHTML(){
 	$('.content').html('<div class="refresh">Brak połączenia z internetem.<br /><br /><a href="#" onclick="refresh()" class="btn btn-primary" data-loading-text="SPRAWDZAM POŁĄCZENIE..." data-error-text="SPRÓBUJ PONOWNIE">ODŚWIEŻ</a></div>');
+	$('.refresh').css({
+		"margin-top": 20-($('.refresh').height() / 2)
+	});
 };
 function loadingHTML(){
 	$('.content').html('<div class="loading"></div>');
@@ -38,23 +41,30 @@ function refresh(){
 function loadContent(){
 	loadingHTML();
 	if(gotConnection()){
-		var c = $('.content').attr('data-controller');
-		var s = 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
+		var	c	= $('.content').attr('data-controller'),
+			cc	= $('.content').attr('data-category'),
+			s	= 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
 		$.ajax({
 			url: 'http://www.tvregionalna24.pl/app/app.php',
 			type: 'GET',
 			async: false,
 			cache: false,
-			data: {controller:c, secret:s},
+			data: {controller:c, category:cc, secret:s},
 			dataType: 'json',
 			success: function(response){
 				console.log(response);
 				switch(response.type){
 					case 'success':
-						
+						$('.content').html('<div class="response">' + response.message + '</div>');
+						break;
+					case 'info':
+						$('.content').html('<div class="response">' + response.message + '</div>');
 						break;
 					case 'error':
 						$('.content').html(response.message);
+						$('.refresh').css({
+							"margin-top": 20-($('.refresh').height() / 2)
+						});
 						break;
 				}
 				/*
@@ -90,4 +100,22 @@ $(document).ready(function(){
 	} else {
 		refreshHTML();
 	}
+	$('a[href*="#"]').bind("click",function(e){
+		e.preventDefault();
+		var hash = e.currentTarget.hash.substr(1);
+		if(hash != 'menu'){
+			$('.content').attr({
+				'data-controller':hash,
+				'data-category':''
+			});
+			if(hash.indexOf('/') >= 0){
+				var s = hash.split("/");
+				$('.content').attr({
+					'data-controller':s[0],
+					'data-category':s[1]
+				});
+			}
+			loadContent();
+		}
+	});
 });
