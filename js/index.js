@@ -16,7 +16,7 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	//if(state == 'fail'){return false;}
+	if(state == 'fail'){return false;}
 	return true;
 };
 function refreshHTML(){
