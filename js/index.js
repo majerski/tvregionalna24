@@ -65,7 +65,7 @@ function loadContent(){
 						$('.content').html('<div class="response">' + response.message + '</div>');
 						break;
 					case 'error':
-						$('.content').html('<div class="response">' + response.message + '</div>');
+						$('.content').html(response.message);
 						$('.refresh').css({
 							"margin-top": 20-($('.refresh').height() / 2)
 						});
