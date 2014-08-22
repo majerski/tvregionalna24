@@ -16,7 +16,7 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	if(state == 'fail'){return false;}
+	//if(state == 'fail'){return false;}
 	return true;
 };
 function refreshHTML(){
@@ -43,7 +43,7 @@ function refresh(){
 function loadContent(){
 	loadingHTML();
 	
-	setTimeout(function(){
+	var interval = setInterval(function(){
 		if(gotConnection()){
 			var	c	= $('.content').attr('data-controller'),
 				cc	= $('.content').attr('data-category'),
@@ -73,6 +73,8 @@ function loadContent(){
 				}
 			}).fail(function(){
 				refreshHTML();
+			}).always(function(){
+				clearInterval(interval);
 			});
 		} else {
 			refreshHTML();
