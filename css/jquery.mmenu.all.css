@@ -355,7 +355,7 @@ html.mm-opened.mm-dragging #mm-blocker {
   line-height: 20px;
   box-sizing: border-box;
   width: 100%;
-  height: 60px;
+  height: 40px;
   padding: 0 50px;
   position: absolute;
   z-index: 2;
@@ -364,7 +364,7 @@ html.mm-opened.mm-dragging #mm-blocker {
   .mm-header .mm-title,
   .mm-header .mm-prev,
   .mm-header .mm-next {
-    padding-top: 30px; }
+    padding-top: 10px; }
   .mm-header .mm-title {
     text-overflow: ellipsis;
     white-space: nowrap;

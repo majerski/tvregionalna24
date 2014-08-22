@@ -16,13 +16,12 @@
 			<a href="#menu" class="bars"></a>
 			<img src="images/logo.png" alt="" class="logo img-responsive" />
 		</div>
-		<div class="content">
-			zawartość
+		<div class="content" data-controller="articles">
+			<div></div>
 		</div>
 	</div>
 	<nav id="menu">
 		<ul>
-			<li><a href="#home">START</a></li>
 			<li><a href="#articles">Aktualności</a>
 				<ul>
 					<li><a href="#articles/3">Wiadomości</a></li>
@@ -208,7 +207,7 @@
 	<script type="text/javascript">
 			$(function() {
 				$("#menu").mmenu({
-					//header: true
+					header:true
 				});
 			});
 		</script>
