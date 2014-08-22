@@ -84,5 +84,9 @@ var app = {
     }
 };
 $(document).ready(function(){
-	loadContent();
+	if(gotConnection()){
+		loadContent();
+	} else {
+		refreshHTML();
+	}
 });
