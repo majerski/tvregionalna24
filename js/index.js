@@ -36,8 +36,9 @@ function refresh(){
 	}
 };
 function loadContent(){
-	$('.content > div').fadeOut("fast",function(){
-		loadingHTML();
+	loadingHTML();
+	//$('.content > div').fadeOut("fast",function(){
+		
 		var c = $('.content').attr('data-controller');
 		var s = 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
 		$.ajax({
@@ -70,7 +71,7 @@ function loadContent(){
 				refreshHTML();
 			}
 		});
-	});
+	//});
 };
 var app = {
     initialize:function(){
