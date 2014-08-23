@@ -32,3 +32,5 @@ html.mm-opened.mm-zoom-menu .mm-page{background-color:#fff}
 .list-item img{max-width:100px;}
 .list-item .content-outer{display:block;overflow:hidden;zoom:1;}
 .list-item small{font-size:90%}
+
+article h5{margin-top:0px;margin-bottom:15px;font-weight:bold;}

@@ -56,7 +56,6 @@ function loadContent(){
 				data: {controller:c, category:cc, secret:s},
 				dataType: 'json'
 			}).done(function(response){
-				console.log(response);
 				switch(response.type){
 					case 'success':
 						$('.content').html('<div class="response">' + response.message + '</div>');
@@ -71,6 +70,7 @@ function loadContent(){
 						});
 						break;
 				}
+				bindLinks();
 			}).fail(function(){
 				refreshHTML();
 			}).always(function(){
@@ -90,14 +90,12 @@ var app = {
     },
     onDeviceReady:function(){
         FastClick.attach(document.body);
+		document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+        }, false );
     }
 };
-$(document).ready(function(){
-	if(gotConnection()){
-		loadContent();
-	} else {
-		refreshHTML();
-	}
+function bindLinks(){
 	$('a[href*="#"]').bind("click",function(e){
 		e.preventDefault();
 		var hash = e.currentTarget.hash.substr(1);
@@ -116,4 +114,12 @@ $(document).ready(function(){
 			loadContent();
 		}
 	});
+};
+$(document).ready(function(){
+	if(gotConnection()){
+		loadContent();
+	} else {
+		refreshHTML();
+	}
+	bindLinks();
 });
