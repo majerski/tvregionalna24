@@ -97,9 +97,9 @@ var app = {
     },
     onDeviceReady:function(){
         FastClick.attach(document.body);
-		document.addEventListener("backbutton", function (e) {
-            e.preventDefault();
-        }, false );
+		//document.addEventListener("backbutton", function (e) {
+        //    e.preventDefault();
+        //}, false );
     }
 };
 function bindLinks(){
