@@ -1,4 +1,5 @@
 var content_loaded = false;
+var page_loaded = true;
 function checkConnection() {
 	if(typeof navigator.connection == 'undefined' || typeof navigator.connection.type == 'undefined') {
 	return 'fail';
@@ -17,10 +18,10 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	//if(state == 'fail'){
-	//	content_loaded = false;
-	//	return false;
-	//}
+	if(state == 'fail'){
+		content_loaded = false;
+		return false;
+	}
 	return true;
 };
 function refreshHTML(){
@@ -77,7 +78,6 @@ function loadContent(){
 						});
 						break;
 				}
-				bindLinks();
 			}).fail(function(){
 				refreshHTML();
 			}).always(function(){
@@ -86,7 +86,50 @@ function loadContent(){
 		} else {
 			refreshHTML();
 		}
-	}, 1000);
+	}, 500);
+};
+function loadPage(){
+	page_loaded = false;
+	$('#page').addClass('relative').append('<div class="loading-page"></div>');
+	var interval = setInterval(function(){
+		if(gotConnection()){
+			var	c	= $('.content').attr('data-controller'),
+				cc	= $('.content').attr('data-category'),
+				p	= $('.content').attr('data-page'),
+				s	= 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
+			$.ajax({
+				url: 'http://www.tvregionalna24.pl/app/app.php',
+				type: 'GET',
+				async: false,
+				cache: false,
+				data: {controller:c, category:cc, page:p, secret:s},
+				dataType: 'json'
+			}).done(function(response){
+				if(c == 'articles' || c == 'companies' || c == 'ads')
+					content_loaded = true;
+				switch(response.type){
+					case 'success':
+						$('.response').append(response.message);
+						break;
+					case 'info':
+						$('.response').append(response.message);
+						break;
+					case 'error':
+						$('.response').append('<div class="alert alert-danger">Nie udało się załadować zawartości.</div>');
+						break;
+				}
+			}).fail(function(){
+				refreshHTML();
+			}).always(function(){
+				clearInterval(interval);
+				$('#page').removeClass('relative');
+				$('.loading-page').remove();
+				page_loaded = true;
+			});
+		} else {
+			refreshHTML();
+		}
+	}, 500);
 };
 var app = {
     initialize:function(){
@@ -97,16 +140,21 @@ var app = {
     },
     onDeviceReady:function(){
         FastClick.attach(document.body);
-		//document.addEventListener("backbutton", function (e) {
-        //    e.preventDefault();
-        //}, false );
+		document.addEventListener("backbutton", function (e) {
+            //e.preventDefault();
+        }, false );
     }
 };
-function bindLinks(){
-	$('a[href*="#"]').bind("click",function(e){
-		e.preventDefault();
-		var hash = e.currentTarget.hash.substr(1);
-		if(hash != 'menu'){
+$(document).ready(function(){
+	if(gotConnection()){
+		loadContent();
+	} else {
+		refreshHTML();
+	}
+	
+	$(window).on('hashchange', function() {
+		var hash = window.location.hash.substr(1);
+		if(typeof hash != 'undefined' && hash != '' && hash != 'menu'){
 			$('.content').attr({
 				'data-controller':hash,
 				'data-category':''
@@ -121,17 +169,13 @@ function bindLinks(){
 			loadContent();
 		}
 	});
-};
-$(document).ready(function(){
-	if(gotConnection()){
-		loadContent();
-	} else {
-		refreshHTML();
-	}
-	bindLinks();
+	
 	$(window).scroll(function(){
-		if(content_loaded && ($(window).scrollTop() == ($(document).height() - $(window).height()))){
-			console.log('scroll');
+		var	c	= $('.content').attr('data-controller');
+		if((c == 'articles' || c == 'companies' || c == 'ads') && content_loaded && ($(window).scrollTop() == ($(document).height() - $(window).height())) && page_loaded){
+			var p = parseInt($('.content').attr('data-page')) + 1;
+			$('.content').attr('data-page', p);
+			loadPage();
 		}
 	});
 });
