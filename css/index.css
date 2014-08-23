@@ -33,4 +33,10 @@ html.mm-opened.mm-zoom-menu .mm-page{background-color:#fff}
 .list-item .content-outer{display:block;overflow:hidden;zoom:1;}
 .list-item small{font-size:90%}
 
-article h5{margin-top:0px;margin-bottom:15px;font-weight:bold;}
+article h5{margin-top:0px;margin-bottom:10px;font-weight:bold;}
+article .summary{display:block;margin-bottom:15px;}
+
+#video_wrapper,#video,.videoouter{background-color:#fff!important;}
+.videoouter{padding:2px;border:1px solid #eee;position:relative;margin-bottom:15px}
+.jwlogo{display:none!important}
+.play_border{display:none;position:absolute;top:50%;left:50%;margin:0;margin-left:-22px;margin-top:-22px;z-index:999;border:2px solid rgba(0,0,0,.7);-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%;width:40px;height:40px;-webkit-box-shadow:0 0 5px 2px rgba(0,0,0,.5);-moz-box-shadow:0 0 5px 2px rgba(0,0,0,.5);box-shadow:0 0 5px 2px rgba(0,0,0,.5);-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;-ms-transition:all .5s ease;transition:all .5s ease;cursor:pointer}.play_border:hover{border-color:transparent;-webkit-box-shadow:0 0 5px 2px rgba(0,0,0,.2);-moz-box-shadow:0 0 5px 2px rgba(0,0,0,.2);box-shadow:0 0 5px 2px rgba(0,0,0,.2)}.play_border:hover .play_button{border-left:10px solid rgba(0,0,0,.5)}.play_border:active,.play_border:focus{-webkit-box-shadow:0 0 5px 2px rgba(0,0,0,.2);-moz-box-shadow:0 0 5.play_button:hoverpx 2px rgba(0,0,0,.2);box-shadow:0 0 5px 2px rgba(0,0,0,.2)}.play_button{position:relative;top:10px;left:40%;width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:10px solid rgba(0,0,0,.8)}

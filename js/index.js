@@ -1,3 +1,4 @@
+var content_loaded = false;
 function checkConnection() {
 	if(typeof navigator.connection == 'undefined' || typeof navigator.connection.type == 'undefined') {
 	return 'fail';
@@ -16,7 +17,10 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	//if(state == 'fail'){return false;}
+	//if(state == 'fail'){
+	//	content_loaded = false;
+	//	return false;
+	//}
 	return true;
 };
 function refreshHTML(){
@@ -47,15 +51,18 @@ function loadContent(){
 		if(gotConnection()){
 			var	c	= $('.content').attr('data-controller'),
 				cc	= $('.content').attr('data-category'),
+				p	= $('.content').attr('data-page'),
 				s	= 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
 			$.ajax({
 				url: 'http://www.tvregionalna24.pl/app/app.php',
 				type: 'GET',
 				async: false,
 				cache: false,
-				data: {controller:c, category:cc, secret:s},
+				data: {controller:c, category:cc, page:p, secret:s},
 				dataType: 'json'
 			}).done(function(response){
+				if(c == 'articles' || c == 'companies' || c == 'ads')
+					content_loaded = true;
 				switch(response.type){
 					case 'success':
 						$('.content').html('<div class="response">' + response.message + '</div>');
@@ -122,4 +129,9 @@ $(document).ready(function(){
 		refreshHTML();
 	}
 	bindLinks();
+	$(window).scroll(function(){
+		if(content_loaded && ($(window).scrollTop() == ($(document).height() - $(window).height()))){
+			console.log('scroll');
+		}
+	});
 });
