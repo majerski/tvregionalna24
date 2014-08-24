@@ -1,9 +1,8 @@
 var content_loaded = false;
 var page_loaded = true;
 function checkConnection() {
-	if(typeof navigator.connection == 'undefined' || typeof navigator.connection.type == 'undefined') {
-	return 'fail';
-	}
+	if(typeof navigator.connection == 'undefined' || typeof navigator.connection.type == 'undefined')
+		return 'fail';
 	var networkState = navigator.connection.type;
 	var states = {};
 	states[Connection.UNKNOWN]  = 'Unknown connection';
@@ -18,10 +17,10 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	if(state == 'fail'){
-		content_loaded = false;
-		return false;
-	}
+	//if(state == 'fail'){
+	//	content_loaded = false;
+	//	return false;
+	//}
 	return true;
 };
 function refreshHTML(){
@@ -141,6 +140,9 @@ var app = {
     },
     onDeviceReady:function(){
         FastClick.attach(document.body);
+		//document.addEventListener("backbutton", function (e) {
+            //e.preventDefault();
+        //}, false );
     }
 };
 $(document).ready(function(){
