@@ -141,9 +141,6 @@ var app = {
     },
     onDeviceReady:function(){
         FastClick.attach(document.body);
-		//document.addEventListener("backbutton", function (e) {
-            //e.preventDefault();
-        //}, false );
     }
 };
 $(document).ready(function(){
