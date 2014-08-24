@@ -120,6 +120,7 @@ function loadPage(){
 				}
 			}).fail(function(){
 				refreshHTML();
+				content_loaded = false;
 			}).always(function(){
 				clearInterval(interval);
 				$('#page').removeClass('relative');
