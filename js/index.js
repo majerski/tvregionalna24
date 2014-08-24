@@ -155,7 +155,6 @@ $(document).ready(function(){
 	
 	$(window).on('hashchange', function() {
 		var h = window.location.hash.substr(1);
-		console.log(h);
 		if(typeof h != 'undefined' && h != '' && h != 'menu'){
 			$('.content').attr({
 				'data-controller':h,
@@ -168,6 +167,13 @@ $(document).ready(function(){
 					'data-category':s[1]
 				});
 			}
+			loadContent();
+		} else if(typeof h != 'undefined' && h == ''){
+			$('.content').attr({
+				'data-controller':'articles',
+				'data-category':'',
+				'data-page':'0'
+			});
 			loadContent();
 		}
 	});
