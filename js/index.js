@@ -140,9 +140,9 @@ var app = {
     },
     onDeviceReady:function(){
         FastClick.attach(document.body);
-		document.addEventListener("backbutton", function (e) {
+		//document.addEventListener("backbutton", function (e) {
             //e.preventDefault();
-        }, false );
+        //}, false );
     }
 };
 $(document).ready(function(){
@@ -153,14 +153,14 @@ $(document).ready(function(){
 	}
 	
 	$(window).on('hashchange', function() {
-		var hash = window.location.hash.substr(1);
-		if(typeof hash != 'undefined' && hash != '' && hash != 'menu'){
+		var h = window.location.hash.substr(1);
+		if(typeof h != 'undefined' && h != '' && h != 'menu'){
 			$('.content').attr({
-				'data-controller':hash,
+				'data-controller':h,
 				'data-category':''
 			});
-			if(hash.indexOf('/') >= 0){
-				var s = hash.split("/");
+			if(h.indexOf('/') >= 0){
+				var s = h.split("/");
 				$('.content').attr({
 					'data-controller':s[0],
 					'data-category':s[1]
