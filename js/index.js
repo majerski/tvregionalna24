@@ -18,10 +18,10 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	if(state == 'fail'){
-		content_loaded = false;
-		return false;
-	}
+	//if(state == 'fail'){
+	//	content_loaded = false;
+	//	return false;
+	//}
 	return true;
 };
 function refreshHTML(){
@@ -155,6 +155,7 @@ $(document).ready(function(){
 	
 	$(window).on('hashchange', function() {
 		var h = window.location.hash.substr(1);
+		console.log(h);
 		if(typeof h != 'undefined' && h != '' && h != 'menu'){
 			$('.content').attr({
 				'data-controller':h,

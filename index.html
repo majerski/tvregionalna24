@@ -205,7 +205,11 @@
 		app.initialize();
 		$(function() {
 			$("#menu").mmenu({
-				header:true
+				header:true,
+				onClick:{
+					preventDefault:false,
+					close:true
+				}
 			});
 		});
 	</script>
