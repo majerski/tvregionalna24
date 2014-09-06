@@ -17,10 +17,10 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	if(state == 'fail'){
-		content_loaded = false;
-		return false;
-	}
+	//if(state == 'fail'){
+	//	content_loaded = false;
+	//	return false;
+	//}
 	return true;
 };
 function refreshHTML(){
