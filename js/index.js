@@ -17,10 +17,10 @@ function checkConnection() {
 };
 function gotConnection(){
 	var state = checkConnection();
-	//if(state == 'fail'){
-	//	content_loaded = false;
-	//	return false;
-	//}
+	if(state == 'fail'){
+		content_loaded = false;
+		return false;
+	}
 	return true;
 };
 function refreshHTML(){
@@ -73,7 +73,7 @@ function loadContent(){
 					case 'error':
 						$('.content').html(response.message);
 						$('.refresh').css({
-							"margin-top": 20-($('.refresh').height() / 2)
+							"margin-top": (20-($('.refresh').height() / 2))
 						});
 						break;
 				}
