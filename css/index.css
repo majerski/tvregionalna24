@@ -56,3 +56,4 @@ article .summary{display:block;margin-bottom:15px;}
 h1.main-heading{height:37px;position:relative;font-size:14px;margin-top:0px;margin-bottom:15px;text-transform:uppercase;text-align:center;padding:10px 15px;background-color:#646464;color:#fff;text-shadow:1px 1px #3d3d3d;}
 h1.main-heading a{color:#fff;}
 h1.main-heading .glyphicon-chevron-left{position:absolute;left:15px;top:10px;}
+h1.main-heading a:hover, h1.main-heading a:active{text-decoration:none;}
