@@ -58,7 +58,7 @@ function loadContent(){
 			//case "cameras": $(".main-heading").html("KAMERY ON-LINE"); break;
 			//case "camera": $(".main-heading").html("KAMERY ON-LINE"); break;
 			case "ads": $(".main-heading").html("OGŁOSZENIA"); break;
-			case "ad": $(".main-heading").html('<a href="#ads"><span class="glyphicon glyphicon-chevron-left pull-left" style="margin-left:8px;"></span>OGŁOSZENIA</a>'); break;
+			case "ad": $(".main-heading").html('<a href="#ads"><span class="glyphicon glyphicon-chevron-left pull-left" style="margin-left:8px;"></span></a><a href="#ads">OGŁOSZENIA</a>'); break;
 			case "companies": $(".main-heading").html("FIRMY"); break;
 			case "company": $(".main-heading").html("FIRMY"); break;
 		}
