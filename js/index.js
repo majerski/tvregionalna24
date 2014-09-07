@@ -48,11 +48,21 @@ function loadContent(){
 	loadingHTML();
 	
 	var interval = setInterval(function(){
+		var	c	= $('.content').attr('data-controller'),
+			cc	= $('.content').attr('data-category'),
+			p	= $('.content').attr('data-page'),
+			s	= 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
+		switch(c){
+			case "articles": $(".main-heading").html("AKTUALNOŚCI"); break;
+			case "article": $(".main-heading").html("AKTUALNOŚCI"); break;
+			case "cameras": $(".main-heading").html("KAMERY ON-LINE"); break;
+			case "camera": $(".main-heading").html("KAMERY ON-LINE"); break;
+			case "ads": $(".main-heading").html("OGŁOSZENIA"); break;
+			case "ad": $(".main-heading").html("OGŁOSZENIA"); break;
+			case "companies": $(".main-heading").html("FIRMY"); break;
+			case "company": $(".main-heading").html("FIRMY"); break;
+		}
 		if(gotConnection()){
-			var	c	= $('.content').attr('data-controller'),
-				cc	= $('.content').attr('data-category'),
-				p	= $('.content').attr('data-page'),
-				s	= 'fv34rver54gsadv54ygaerfgg3ygdszrg3uyhysezrg3uyyhseryh7yhysehyj4';
 			$.ajax({
 				url: 'http://www.tvregionalna24.pl/app/app.php',
 				type: 'GET',
@@ -104,6 +114,17 @@ function loadPage(){
 				data: {controller:c, category:cc, page:p, secret:s},
 				dataType: 'json'
 			}).done(function(response){
+				
+				switch(c){
+					case "articles": $(".main-heading").html("AKTUALNOŚCI"); break;
+					case "article": $(".main-heading").html("AKTUALNOŚCI"); break;
+					
+					case "cameras": $(".main-heading").html("KAMERY ON-LINE"); break;
+					case "camera": $(".main-heading").html("KAMERY ON-LINE"); break;
+					
+					case "ads": $(".main-heading").html("OGŁOSZENIA"); break;
+				}
+				
 				if(c == 'articles' || c == 'companies' || c == 'ads')
 					content_loaded = true;
 				switch(response.type){
